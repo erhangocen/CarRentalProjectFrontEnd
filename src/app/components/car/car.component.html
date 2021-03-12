@@ -1,0 +1,31 @@
+<div *ngIf="!dataLoaded" class="d-flex justify-content-center">
+<div class="spinner-grow text-info mb-5" role="status">
+  <span class="sr-only"></span>
+</div>
+</div>
+
+<table class="container mt-2" *ngIf="dataLoaded">
+	<thead>
+		<tr>
+			<th scope="col"><h1>Car</h1></th>
+			<th scope="col"><h1>Brand</h1></th>
+			<th scope="col"><h1>Color</h1></th>
+			<th scope="col"><h1>ModelYear</h1></th>
+            <th scope="col"><h1>DailyPrice</h1></th>
+			<th scope="col"><h1>Edit / Delete</h1></th>
+		</tr>
+	</thead>
+	<tbody *ngFor="let car of cars">
+		<tr>
+			<td>{{car.carName}}</td>
+			<td>{{car.brandName}}</td>
+			<td>{{car.colorName}}</td>
+			<td>{{car.modelYear}}</td>
+            <td>{{car.dailyPrice}}</td>
+			<td>
+				<button class="btn btn-success"><fa-icon [icon]="faWrench"></fa-icon></button>
+				<button class="btn btn-danger ml-5"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+			</td>
+		</tr>
+	</tbody>
+</table>
