@@ -18,7 +18,12 @@
 			<td>{{rental.car}}</td>
 			<td>{{rental.customerName}}</td>
 			<td>{{rental.rentDate}}</td>
-			<td>{{rental.returnDate}}</td>
+			<td *ngIf="rental.returnDate != null">{{rental.returnDate}}</td>
+			<td *ngIf="rental.returnDate == null" class="mid">
+				<button class="btn btn-success pl-5">
+					<fa-icon [icon]="faCheck"></fa-icon>
+				</button>
+			</td>
 		</tr>
 		
 	</tbody>

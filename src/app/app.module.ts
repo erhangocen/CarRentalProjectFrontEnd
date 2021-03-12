@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ColorComponent } from './components/color/color.component';
 import { RentalComponent } from './components/rental/rental.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrandComponent,
     NavbarComponent,
     ColorComponent,
-    RentalComponent
+    RentalComponent,
+    UserComponent
     
   ],
   imports: [

@@ -6,7 +6,7 @@ import { faCoffee,faWrench,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
-  styleUrls: ['./car.component.css']
+  styleUrls: ['./car.component.css', '.././utilities/border.css']
 })
 export class CarComponent implements OnInit {
 

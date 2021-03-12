@@ -1,0 +1,23 @@
+<div *ngIf="!dataLoaded" class="d-flex justify-content-center">
+<div class="spinner-grow text-info" role="status">
+  <span class="sr-only"></span>
+</div>
+</div>
+
+<table class="container mt-2 mb-5" *ngIf="dataLoaded">
+	<thead>
+		<tr>
+			<th scope="col"><h1>User</h1></th>
+			<th scope="col"><h1>Email</h1></th>
+			<th scope="col"><h1>Company Name</h1></th>
+		</tr>
+	</thead>
+	<tbody *ngFor="let user of users">
+		<tr>
+			<td>{{user.firstName + " " + user.lastName}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.companyName}}</td>
+		</tr>
+		
+	</tbody>
+</table>
