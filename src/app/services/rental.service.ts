@@ -8,12 +8,22 @@ import { RentalResponseModel } from '../models/rentalResponseModel';
 })
 export class RentalService {
 
-  apiUrl = "https://localhost:44350/api/rentals/getfullrentaldetails";
+  fullRentalUrl = "https://localhost:44350/api/rentals/getfullrentaldetails";
+  hadRentedUrl = "https://localhost:44350/api/rentals/getrentedetail";
+  rentedUrl = "https://localhost:44350/api/rentals/getrentaldetail";
 
   constructor(private http: HttpClient) { }
 
-  getRentals():Observable<RentalResponseModel> {
-    return this.http.get<RentalResponseModel>(this.apiUrl);
+  getFullRentals():Observable<RentalResponseModel> {
+    return this.http.get<RentalResponseModel>(this.fullRentalUrl);
+  }
+
+  getHadRenteds(): Observable<RentalResponseModel> {
+    return this.http.get<RentalResponseModel>(this.hadRentedUrl);
+  }
+
+  getRenteds(): Observable<RentalResponseModel> {
+    return this.http.get<RentalResponseModel>(this.rentedUrl);
   }
 
 }

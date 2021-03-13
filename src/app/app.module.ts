@@ -12,6 +12,12 @@ import { ColorComponent } from './components/color/color.component';
 import { RentalComponent } from './components/rental/rental.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserComponent } from './components/user/user.component';
+import { HadrentalComponent } from './components/hadrental/hadrental.component';
+import { NewrentalComponent } from './components/newrental/newrental.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { GeneralitemsComponent } from './components/generalitems/generalitems.component';
+
 
 @NgModule({
   declarations: [
@@ -21,8 +27,12 @@ import { UserComponent } from './components/user/user.component';
     NavbarComponent,
     ColorComponent,
     RentalComponent,
-    UserComponent
-    
+    UserComponent,
+    HadrentalComponent,
+    NewrentalComponent,
+    LoadingComponent,
+    MenuComponent,
+    GeneralitemsComponent,
   ],
   imports: [
     BrowserModule,

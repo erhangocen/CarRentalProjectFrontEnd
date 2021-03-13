@@ -1,10 +1,13 @@
 <div *ngIf="!dataLoaded" class="d-flex justify-content-center">
-<div class="spinner-grow text-info" role="status">
-  <span class="sr-only"></span>
-</div>
+<app-loading></app-loading>
 </div>
 
-<table class="container mt-2 mb-5" *ngIf="dataLoaded">
+<div class="card bg-success" *ngIf="dataLoaded">
+  <div class="card-body" align="center">
+    ALL USERS
+  </div>
+</div>
+<table class="container mt-2 mb-5" *ngIf="dataLoaded" id="user">
 	<thead>
 		<tr>
 			<th scope="col"><h1>User</h1></th>

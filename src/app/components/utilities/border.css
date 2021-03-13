@@ -86,6 +86,7 @@ h2 a {
 .container td:hover {
   background-color: #FFF842;
   color: #403E10;
+  font-weight: bold;
   
   box-shadow: #7F7C21 -0.5px 0.5px, #7F7C21 -1px 1px, #7F7C21 -1.5px 1.5px, #7F7C21 -2px 2px, #7F7C21 -2.5px 2.5px, #7F7C21 -3px 3px;
   transform: translate3d(3px, -3px, 0);
@@ -103,4 +104,16 @@ h2 a {
 
 .btn{
   margin-left: 15px !important;
+}
+
+.card{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.card-body{
+    font-weight:1000;
+    padding:7px;
+    font-size:20px;
+    letter-spacing: 5px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
 }

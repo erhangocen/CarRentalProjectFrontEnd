@@ -2,8 +2,8 @@
 <app-loading></app-loading>
 </div>
 <div class="card bg-success" *ngIf="dataLoaded">
-  <div class="card-body" align="center" id="allrentals">
-    ALL RENTALS
+  <div class="card-body" align="center" id="newrented">
+    ALL NEW RENTED
   </div>
 </div>
 <table class="container mt-2 mb-5" *ngIf="dataLoaded">
@@ -12,22 +12,16 @@
 			<th scope="col"><h1>Car</h1></th>
 			<th scope="col"><h1>Customer Name</h1></th>
 			<th scope="col"><h1>Rent Date</h1></th>
-			<th scope="col"><h1>Return Date</h1></th>
 		</tr>
 	</thead>
-	<tbody *ngFor="let rental of rentals">
+	<tbody *ngFor="let rental of newRentals">
 		<tr>
 			<td>{{rental.car}}</td>
 			<td>{{rental.customerName}}</td>
 			<td>{{rental.rentDate}}</td>
-			<td *ngIf="rental.returnDate != null">{{rental.returnDate}}</td>
-			<td *ngIf="rental.returnDate == null" class="mid">
-				<button class="btn btn-success pl-5">
-					<fa-icon [icon]="faCheck"></fa-icon>
-				</button>
-			</td>
 		</tr>
 		
 	</tbody>
 </table>
+
 

@@ -1,10 +1,12 @@
 <div *ngIf="!dataLoaded" class="d-flex justify-content-center">
-<div class="spinner-grow text-info mb-5" role="status">
-  <span class="sr-only"></span>
+<app-loading></app-loading>
 </div>
+<div class="card bg-success" *ngIf="dataLoaded">
+  <div class="card-body" align="center" id="cars">
+    ALL CARS
+  </div>
 </div>
-
-<table class="container mt-2" *ngIf="dataLoaded">
+<table class="container mt-2 mb-5" *ngIf="dataLoaded">
 	<thead>
 		<tr>
 			<th scope="col"><h1>Car</h1></th>
