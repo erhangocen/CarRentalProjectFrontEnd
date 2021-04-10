@@ -1,0 +1,24 @@
+.addcar{
+    border: 2px dashed white;
+    height: 90px;
+    width: 83%;
+    position: relative;
+    left: 8.5%;
+    background-color: rgba(34, 34, 34, 0.918);
+    text-align: center;
+    color: rgba(240, 248, 255, 0.123);
+    font-size: 60px;
+}
+
+.alert{
+    width: 83%;
+    position: relative;
+    left: 8.5%;
+}
+
+.brand-form{
+    border-radius: 50px;
+    width: 83%;
+    position: relative;
+    left: 8.5%;
+}

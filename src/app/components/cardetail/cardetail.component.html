@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="card bg-dark text-light">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+
+                    <div id="carouselExampleIndicators" class="carousel slide"
+                        data-bs-ride="carousel">
+
+                        <div class="carousel-inner" style="width: 575px;
+                            height:430px;">
+                            <div [ngClass]="carouselClass(index)"
+                                *ngFor="let image of carImages let index=
+                                index">
+
+                                <img src="{{basePath}}{{image.imagePath}}"
+                                    class="d-block" alt="...">
+                            </div>
+                        </div>
+                        <div>
+                            <button
+                                class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon"
+                                    aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="details col-md-6" *ngIf="car">
+                    <h2 class="product-title noscrool">{{car.carName}}</h2>
+                    <ul>
+                        <li>
+                            <div class="info">
+                                <span class="titles">Brand : </span>
+                                <span class="props">{{car.brandName}} </span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="info">
+                                <span class="titles">Color : </span>
+                                <span class="props">{{car.colorName}} </span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="info">
+                                <span class="titles">Daily Price : </span>
+                                <span class="props">{{car.dailyPrice |
+                                    currency}}</span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="info">
+                                <span class="titles">Model Year : </span>
+                                <span class="props">{{car.modelYear}} </span>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <div class="action mt-4">
+                        <button class="add-to-cart btn btn-default"
+                            type="button" data-bs-toggle="modal"
+                            data-bs-target="#rent">Rent Now!</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="rent" tabindex="-1"
+    aria-labelledby="car" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Rent Car</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Rent
+                        Date:</label>
+                    <input class="form-control"
+                        type="datetime-local" [(ngModel)]="rentDate"
+                        id="rentDate">
+                </div>
+
+                <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Return
+                        Date:</label>
+                    <input class="form-control"
+                        type="datetime-local" [(ngModel)]="returnDate"
+                        id="returnDate">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn
+                    btn-primary" (click)="rentRequest()"
+                    data-bs-dismiss="modal">Rent Car</button>
+            </div>
+        </div>
+    </div>
+</div>

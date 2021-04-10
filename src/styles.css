@@ -1,12 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-color: rgba(20, 20, 20, 0.158);
-    background-image:url("https://i.pinimg.com/originals/c5/56/0c/c5560cff28287c548f2c5d53590d7e84.jpg");
+    background-image:url("backgroundcar.jpeg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    backdrop-filter: grayscale(0.6) opacity(0.9);
-    backdrop-filter: 100%;
 }
 
 

@@ -1,26 +1,33 @@
 <div *ngIf="!dataLoaded" class="d-flex justify-content-center">
-<app-loading></app-loading>
+	<app-loading></app-loading>
 </div>
-
-<div class="card bg-success" *ngIf="dataLoaded">
-  <div class="card-body" align="center">
-    ALL USERS
-  </div>
+<div class="mb-3">
+	<input type="text" class="form-control rental-form mt-4"
+		id="exampleInputEmail1"
+		placeholder="Search something 🔍"
+		[(ngModel)]="filterText">
+	<div class="alert alert-danger mt-3" *ngIf="filterText"
+		role="alert">
+		searching "{{filterText}}"
+	</div>
 </div>
-<table class="container mt-2 mb-5" *ngIf="dataLoaded" id="user">
+<table class="container mt-2 mb-5" *ngIf="dataLoaded" id="user" style="width:
+	75%;">
 	<thead>
 		<tr>
 			<th scope="col"><h1>User</h1></th>
 			<th scope="col"><h1>Email</h1></th>
 			<th scope="col"><h1>Company Name</h1></th>
+			<th scope="col"><h1>Claim Name</h1></th>
 		</tr>
 	</thead>
-	<tbody *ngFor="let user of users">
+	<tbody *ngFor="let user of users | filteruser:filterText">
 		<tr>
 			<td>{{user.firstName + " " + user.lastName}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.companyName}}</td>
+			<td>{{user.claimName}}</td>
 		</tr>
-		
+
 	</tbody>
 </table>

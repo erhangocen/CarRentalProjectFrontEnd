@@ -1,19 +1,8 @@
 <div class="container">
   <app-navbar></app-navbar>
-  <div class="row mt-3">
-    <div class="col-md-3 fixx">
-      <app-brand></app-brand>
-      <app-color></app-color>
-      <app-menu></app-menu>
-    </div>
-    <div class="col-md-9">
-      <app-car></app-car>
-      <app-rental></app-rental>
-      <app-newrental></app-newrental>
-      <app-hadrental></app-hadrental>
-      <app-user></app-user>
-    </div>
-  </div>
+
+  <router-outlet></router-outlet>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </div>
-<app-generalitems></app-generalitems>
-<router-outlet></router-outlet>

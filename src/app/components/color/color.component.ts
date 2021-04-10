@@ -10,6 +10,7 @@ import { ColorService } from 'src/app/services/color.service';
 export class ColorComponent implements OnInit {
 
   colors: Color[] = [];
+  selectColor: Color;
   dataLoaded = false;
 
   constructor(private colorService: ColorService) { }
@@ -26,4 +27,18 @@ export class ColorComponent implements OnInit {
       }
     })
   }
+
+  selectcolor(color:Color) {
+    this.selectColor = color;
+  }
+
+  selectsClass(color:Color) {
+    if(this.selectColor != color) {
+      return "list-group-item list-group-item-action bg-dark text-light list-hover"
+    }
+    else {
+      return "list-group-item bg-success text-light"
+    }
+  }
+
 }

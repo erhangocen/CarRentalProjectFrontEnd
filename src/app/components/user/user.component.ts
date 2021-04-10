@@ -12,6 +12,8 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   dataLoaded = false;
 
+  filterText: string;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <form class="box" [formGroup]="loginForm">
+                <h1>LOGIN</h1>
+                <p class="text-muted"> Please enter your login and password!</p>
+                <input type="email" name="" placeholder="Email"
+                    formControlName="email">
+
+                <input type="password" name="" placeholder="Password"
+                    formControlName="password">
+
+                <input type="submit" name="" value="Login" (click)="login()">
+                <div class="col-md-12">
+                    <ul class="social-network social-circle">
+                        <li><a class="icoFacebook"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faFacebook"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                        <li><a class="icoTwitter"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faTwitter"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                        <li><a class="icoGoogle"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faGooglePlus"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="mt-3">
+                        <a class="forgot text-muted" routerLink="/register">New
+                            to CarRental?</a><br>
+                        <div class="forgot text-muted" style="text-decoration:
+                            none;">-or-</div>
+                        <a class="forgot text-muted" routerLink="/">Forgot
+                            password?</a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

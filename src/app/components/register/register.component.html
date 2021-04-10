@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <form [formGroup]="registerForm" class="box">
+                <h1>REGISTER</h1>
+
+                <p class="text-muted"> Please enter places and register!</p>
+                <input type="text" name="" placeholder="First Name"
+                    formControlName="firstName">
+                <input type="text" name="" placeholder="Last Name"
+                    formControlName="lastName">
+
+                <input type="email" name="" placeholder="Email"
+                    formControlName="email">
+
+                <input type="password" name="" placeholder="Password"
+                    formControlName="password">
+                <input type="password" name="" placeholder="Again Password"
+                    formControlName="passwordAgain">
+                <input type="submit" name="" value="Register"
+                    (click)="register()">
+
+                <div class="col-md-12">
+                    <ul class="social-network social-circle">
+                        <li><a class="icoFacebook"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faFacebook"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                        <li><a class="icoTwitter"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faTwitter"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                        <li><a class="icoGoogle"
+                                title="Facebook">
+                                <i class="fab">
+                                    <fa-icon [icon]="faGooglePlus"></fa-icon>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="mt-1">
+                        <a class="forgot text-muted" routerLink="/login">Already
+                            have an account ?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

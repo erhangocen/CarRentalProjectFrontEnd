@@ -1,0 +1,171 @@
+ <div class="card bg-dark text-light">
+    <div class="container-fliud">
+        <div class="wrapper row">
+            <div class="preview col-md-5">
+                <div id="card-success" class="hidden">
+                    <i class="fa fa-check"></i>
+                    <p>Payment Successful!</p>
+                </div>
+                <div id="form-errors" class="hidden">
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <p id="card-error">Card error</p>
+                </div>
+                <div id="form-container">
+
+                    <div id="card-front">
+                        <div id="shadow"></div>
+                        <div id="image-container">
+                            <span id="amount">paying: <strong>{{amountPaye |
+                                    currency}}</strong></span>
+                            <span id="card-image">
+
+                            </span>
+                        </div>
+                        <!--- end card image container --->
+                        <form [formGroup]="cardAddForm">
+                            <label for="card-number">
+                                Card Number
+                            </label>
+
+                            <input type="text" id="card-number"
+                                placeholder="1234 1234 1234 1234"
+                                formControlName="cardNumber" minlength="16"
+                                maxlength="16">
+                            <div id="cardholder-container">
+                                <label for="card-holder">Card Holder
+                                </label>
+                                <input type="text" id="card-holder"
+                                    placeholder="e.g. John Doe"
+                                    formControlName="cardHolder" />
+                            </div>
+                            <!--- end card holder container --->
+                            <div id="exp-container">
+                                <label for="card-exp">
+                                    Expiration
+                                </label>
+                                <input id="card-month" type="number"
+                                    placeholder="MM" max="12" min="1"
+                                    formControlName="expMonth">
+                                <input id="card-year" type="number"
+                                    placeholder="YY" max="21" min="29"
+                                    formControlName="expYear">
+                            </div>
+                            <div id="cvc-container">
+                                <label for="card-cvc"> CVC </label>
+                                <input id="card-cvc" placeholder="XXX-X"
+                                    formControlName="cvc"
+                                    type="text"
+                                    type="number"
+                                    maxlength="4">
+                                <p>Last 3 or 4 digits</p>
+                            </div>
+                            <!--- end CVC container --->
+                            <!--- end exp container --->
+                        </form>
+                    </div>
+                    <!--- end card front --->
+                    <div id="card-back">
+                        <div id="card-stripe">
+                        </div>
+
+                    </div>
+                    <!--- end card back --->
+                    <input type="text" id="card-token" />
+                    <button type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" id="card-btn"
+                        (click)="targetNewCard()"><strong>Pay
+                            With New
+                            Card</strong></button>
+                </div>
+                <!--- end form container --->
+            </div>
+
+            <div class="col-md-4">
+                <div class="right border text-dark rightcards"
+                    *ngIf="cards.length> 0">
+                    <div class="header">Registered Cards</div>
+                    <p>{{cards.length}} items</p>
+                    <hr>
+
+
+                    <div *ngFor="let card of cards" class="credit rounded mt-2
+                        d-flex
+                        justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center">
+                            <input class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault1"
+                                style="width: auto; height:auto; margin:2px 5px
+                                0px 0px; border:2px solid rgba(14, 14, 14,
+                                0.808)" (click)="targetThisCard(card)">
+                            <img
+                                src="https://i.imgur.com/qHX7vY1.png"
+                                class="rounded" width="70">
+                            <div class="d-flex flex-column ml-3"> <span
+                                    class="business">{{card.cardHolder}}</span>
+                                <span
+                                    class="plan">{{card.cardNumber}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row lower">
+                        <div class="col text-left"></div>
+                    </div> <button *ngIf="targetCard" class="btn btncs"
+                        (click)="pay()">Pay With a Registered Card</button>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="right border text-dark rightcards">
+                    <div class="header">Payment Details</div>
+                    <hr>
+                    <div class="row lower">
+                        <div class="col text-left">Car Name</div>
+                        <div class="col text-right">{{car.carName}}</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left">Model Year</div>
+                        <div class="col text-right">{{car.modelYear}}</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left">Daily Price</div>
+                        <div class="col text-right">{{car.dailyPrice}}</div>
+                    </div>
+                    <div class="row lower">
+                        <div class="col text-left"><b>Total Price</b></div>
+                        <div class="col text-right"><b>{{amountPaye |currency}}</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Credit Card</h5>
+                    <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Do you want to save your credit card ?
+                </div>
+                <div class="modal-footer">
+                    <button style="all: none;" type="button" class="btn
+                        btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"
+                        (click)="payWithNewCard()" data-bs-dismiss="modal">Pay
+                        But Don't
+                        Save Card</button>
+                    <button type="button" class="btn btn-success"
+                        (click)="addCard()" data-bs-dismiss="modal">Pay and
+                        Save Card</button>
+                </div>
+            </div>
+        </div>
+    </div>

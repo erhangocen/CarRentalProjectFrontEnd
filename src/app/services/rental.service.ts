@@ -1,29 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RentalResponseModel } from '../models/rentalResponseModel';
+import { BaseResponseModel } from '../models/baseResponseModel';
+import { ListResponseModel } from '../models/listResponseModel';
+import { NewRental } from '../models/newRental';
+import { Rental } from '../models/rental';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalService {
 
-  fullRentalUrl = "https://localhost:44350/api/rentals/getfullrentaldetails";
-  hadRentedUrl = "https://localhost:44350/api/rentals/getrentedetail";
-  rentedUrl = "https://localhost:44350/api/rentals/getrentaldetail";
+  apiUrl = "https://localhost:44350/api/rentals";
 
   constructor(private http: HttpClient) { }
 
-  getFullRentals():Observable<RentalResponseModel> {
-    return this.http.get<RentalResponseModel>(this.fullRentalUrl);
+  getFullRentals(): Observable<ListResponseModel<Rental>> {
+    let fullPath = this.apiUrl + "/getfullrentaldetails";
+    return this.http.get<ListResponseModel<Rental>>(fullPath);
   }
 
-  getHadRenteds(): Observable<RentalResponseModel> {
-    return this.http.get<RentalResponseModel>(this.hadRentedUrl);
+  getRentalsByUser(customerId: number):Observable<ListResponseModel<Rental>> {
+    let fullPath = this.apiUrl + "/getrentalsbyuser?id=" + customerId;
+    return this.http.get<ListResponseModel<Rental>>(fullPath);
   }
 
-  getRenteds(): Observable<RentalResponseModel> {
-    return this.http.get<RentalResponseModel>(this.rentedUrl);
+  checkCarStatus(rental: NewRental):Observable<BaseResponseModel> {
+    let fullPath = this.apiUrl + "/checkcarstatus";
+    return this.http.post<BaseResponseModel>(fullPath, rental);
   }
 
+  add(rental: NewRental) {
+    let fullPath = this.apiUrl + "/add";
+    return this.http.post<BaseResponseModel>(fullPath, rental);
+  }
+  
 }

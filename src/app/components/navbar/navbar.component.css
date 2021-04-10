@@ -2,9 +2,32 @@ nav{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     padding : 10px;
+    font-weight: 750;
 }
 
 .container-fluid{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
+.pp{
+    width: 28px;
+    height: 28px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.nav-item{
+    margin-right: 20px;
+    height: inherit;
+}
+
+fa-icon{
+    font-size: 14px;
+}
+
+.nick{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  letter-spacing: 1px;
+
+}

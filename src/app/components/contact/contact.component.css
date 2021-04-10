@@ -1,0 +1,50 @@
+
+/* body {
+  background: #D9B280;
+  font-family: "Roboto", sans-serif;
+} */
+
+.container {
+  background: #FFFFFF;
+  width: 900px;
+  height: fit-content;
+  margin: 1% auto;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+}
+
+.contact-form {
+  width: 75%;
+  margin-left: 2%;
+}
+.title {
+  font-size: 2.5em;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  color: #242424;
+  margin: 5% 8%;
+}
+.subtitle {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin: 0 4% 5% 8%;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 330px;
+  padding: 3%;
+  margin: 7% 8%;
+  color: #242424;
+  border: 1px solid #B7B7B7;
+}
+
+
+.btn-send {
+  background: #A383C9;
+  width: 180px;
+  height: 60px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin: 20% 8% 1%;
+  border: none;
+}

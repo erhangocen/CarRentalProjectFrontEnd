@@ -1,0 +1,217 @@
+<app-loading *ngIf="!pp"></app-loading>
+
+<div class="container emp-profile" *ngIf="pp">
+    <div class="row" style="height:fit-content;">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img class="img"
+                    src="{{basePath}}{{pp.imagePath}}"
+                    alt="" />
+                <div class="file btn btn-lg btn-primary">
+                    Change Photo
+                    <input type="file" name="file"
+                        (change)="selectFiles($event)">
+                </div>
+            </div>
+            <div style="text-align: center;">
+
+                <button *ngIf="pp.userId != 0" class="btn btn-danger w-75 mb-3"
+                    (click)="removePp()">Delete Photo</button>
+
+                <button class="btn btn-primary w-75" *ngIf="selectFile"
+                    (click)="uploadFile()">Save
+                    Changes</button>
+
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5 class="mb-3 username">
+                    {{user.firstName}} {{user.lastName}}
+                </h5>
+
+                <table class="table table-bordered" *ngIf="!isAnyRentall">
+                    <thead>
+                        <tr>
+                            <th colspan="3" style="text-align: center;">Rental
+                                History</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Car Name</th>
+                            <th scope="col">Rent Date</th>
+                            <th scope="col">Return Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rental of rentals">
+                            <td>{{rental.carName}}</td>
+                            <td>{{rental.rentDate}}</td>
+                            <td>{{rental.returnDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-danger notfound"
+                    role="alert"
+                    *ngIf="isAnyRentall">
+                    Rented Car Not Found
+                </div>
+
+
+                <table class="table table-bordered mt-4" *ngIf="cards.length !=
+                    0">
+                    <thead>
+                        <tr>
+                            <th colspan="3" style="text-align: center;">Registred
+                                Cards</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Card Holder</th>
+                            <th scope="col">Card Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let card of cards">
+                            <td>{{card.cardHolder}}</td>
+                            <td>{{card.cardNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-danger notfound"
+                    role="alert"
+                    *ngIf="cards.length == 0">
+                    Registred Card Not Found
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2">
+
+            <button type="submit" class="profile-edit-btn edit"
+                name="btnAddMore"
+                data-bs-toggle="modal"
+                data-bs-target="#update"><fa-icon [icon]="faPen"></fa-icon>
+                Edit
+                Profile</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-work">
+
+            </div>
+        </div>
+        <div class="col-md-8 user" *ngIf="user">
+            <div class="tab-content profile-tab"
+                id="myTabContent">
+                <div class="tab-pane fade show
+                    active" id="home"
+                    role="tabpanel"
+                    aria-labelledby="home-tab">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>First Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.firstName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.lastName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.email}}</p>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="user.companyName">
+                        <div class="col-md-6">
+                            <label>Company</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.companyName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Authorization</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.claimName}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Findeks Point</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p>{{user.findeksPoint}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- user update -->
+<div class="modal fade" id="update" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateForm">
+
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">First
+                            Name: </label>
+                        <input type="text"
+                            formControlName="firstName" autocomplete="off"
+                            class="form-control"
+                            id="recipient-name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Last
+                            Name:</label>
+                        <input type="text" formControlName="lastName"
+                            autocomplete="off"
+                            class="form-control"
+                            id="recipient-name">
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Company
+                            Name:</label>
+                        <input type="text" formControlName="companyName"
+                            class="form-control" autocomplete="off"
+                            id="recipient-name">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary"
+                    (click)="update()">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>

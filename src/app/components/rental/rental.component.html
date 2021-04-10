@@ -1,12 +1,17 @@
 <div *ngIf="!dataLoaded" class="d-flex justify-content-center">
-<app-loading></app-loading>
+	<app-loading></app-loading>
 </div>
-<div class="card bg-success" *ngIf="dataLoaded">
-  <div class="card-body" align="center" id="allrentals">
-    ALL RENTALS
-  </div>
+<div class="mb-3">
+	<input type="text" class="form-control rental-form mt-4"
+		id="exampleInputEmail1"
+		placeholder="Search something 🔍"
+		[(ngModel)]="filterText">
+	<div class="alert alert-danger mt-3" *ngIf="filterText"
+		role="alert">
+		searching "{{filterText}}"
+	</div>
 </div>
-<table class="container mt-2 mb-5" *ngIf="dataLoaded">
+<table class="container mt-2 mb-5" *ngIf="dataLoaded" style="width: 80%;">
 	<thead>
 		<tr>
 			<th scope="col"><h1>Car</h1></th>
@@ -15,9 +20,9 @@
 			<th scope="col"><h1>Return Date</h1></th>
 		</tr>
 	</thead>
-	<tbody *ngFor="let rental of rentals">
+	<tbody *ngFor="let rental of rentals | filterrental:filterText">
 		<tr>
-			<td>{{rental.car}}</td>
+			<td>{{rental.carName}}</td>
 			<td>{{rental.customerName}}</td>
 			<td>{{rental.rentDate}}</td>
 			<td *ngIf="rental.returnDate != null">{{rental.returnDate}}</td>
@@ -27,7 +32,6 @@
 				</button>
 			</td>
 		</tr>
-		
+
 	</tbody>
 </table>
-

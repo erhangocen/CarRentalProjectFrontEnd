@@ -1,33 +1,87 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-  
-    <a class="navbar-brand" href="#">CarRental</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cars</a>
-        </li>
+
+  <a class="navbar-brand" routerLink="/"><img
+      src="https://localhost:44350//Images/CarImages/logo.png"
+      width="45px" height="45px">
+    CarRental</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" routerLink="/cars"><fa-icon
+            [icon]="faHome"></fa-icon> Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/cars"><fa-icon [icon]="faCar"></fa-icon>
+          Cars</a>
+      </li>
+      <li class="nav-item" *ngIf="role == 'Customer'">
+        <a class="nav-link" routerLink="/contact"><fa-icon
+            [icon]="faPaperPlane"></fa-icon>
+          Contact</a>
+      </li>
+
+      <li class="nav-item" *ngIf="role == 'Admin'">
+        <a class="nav-link" routerLink="/admin/contact"><fa-icon
+            [icon]="faPaperPlane"></fa-icon>
+          Contact</a>
+      </li>
+
+      <div *ngIf="role == 'Admin'">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Account
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <fa-icon [icon]="faCrown"></fa-icon> Admin Panel
           </a>
-          <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item text-light" href="#">Register</a></li>
-            <li><a class="dropdown-item text-light" href="#">Login</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a routerLink="/{{menu.menuPath}}"
+                [class]="menusClass(menu)"
+                (click)="menuSelect(menu)" *ngFor="let menu of menuss">{{menu.menuName}}</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Admin</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </div>
+
+    </ul>
+    <div class="d-flex" *ngIf="!isAuthenticated()">
+      <button class="btn btn-outline-primary me-2" type="submit"
+        routerLink="/login">Login</button>
+      <button class="btn btn-outline-success" type="submit" style="border:
+        none;" routerLink="/register">Register</button>
     </div>
+
+
+    <div class="dropdown" *ngIf="isAuthenticated()">
+      <button class="btn btn-dark
+        dropdown-toggle text-info" type="button"
+        id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <span *ngIf="pp"><img class="pp"
+            src="{{basePath}}{{pp.imagePath}}"></span>
+        <span class="nick">{{ firstName() }}</span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item disabled"><fa-icon [icon]="faUser"
+              *ngIf="role ==
+              'Customer'"></fa-icon>
+            <fa-icon [icon]="faCrown" *ngIf="role ==
+              'Admin'"></fa-icon>
+            {{role}}</a></li>
+        <li><a class="dropdown-item" style="user-select: none;" *ngIf="role ==
+            'Customer'"
+            routerLink="/profile"><fa-icon [icon]="faUser"></fa-icon> Your
+            Profile</a></li>
+        <li><a class="dropdown-item" style="user-select: none;"
+            (click)="logOut()"><fa-icon [icon]="faSignOutAlt"></fa-icon> Log Out</a></li>
+      </ul>
+
+    </div>
+
+  </div>
+
 </nav>
+<!-- https://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/Car-icon.png -->

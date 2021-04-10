@@ -14,6 +14,8 @@ export class RentalComponent implements OnInit {
   dataLoaded = false;
   faCheck = faCheck;
 
+  filterText: string;
+
   constructor(private rentalService: RentalService) { }
 
   ngOnInit(): void {

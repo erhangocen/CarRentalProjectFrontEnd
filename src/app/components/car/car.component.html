@@ -1,33 +1,253 @@
 <div *ngIf="!dataLoaded" class="d-flex justify-content-center">
-<app-loading></app-loading>
+	<app-loading></app-loading>
 </div>
-<div class="card bg-success" *ngIf="dataLoaded">
-  <div class="card-body" align="center" id="cars">
-    ALL CARS
-  </div>
+
+<div class="container">
+	<button class="addcar mt-3" data-bs-toggle="modal" data-bs-target="#car">+</button>
+	<div class="mb-3">
+		<input type="text" class="form-control brand-form mt-4"
+			id="exampleInputEmail1"
+			placeholder="Search something 🔍" autocomplete="off"
+			[(ngModel)]="filterText">
+		<div class="alert alert-danger mt-3" *ngIf="filterText"
+			role="alert">
+			searching "{{filterText}}"
+		</div>
+	</div>
+
+	<table class="container mt-2 mb-5 mt-3" *ngIf="dataLoaded" style="width: 83%;">
+		<thead>
+			<tr>
+				<th scope="col"><h1>Car</h1></th>
+				<th scope="col"><h1>Brand</h1></th>
+				<th scope="col"><h1>Color</h1></th>
+				<th scope="col"><h1>ModelYear</h1></th>
+				<th scope="col"><h1>DailyPrice</h1></th>
+				<th scope="col"><h1>Min Findeks Point</h1></th>
+				<th scope="col"><h1>Add Image / Edit / Delete</h1></th>
+			</tr>
+		</thead>
+		<tbody *ngFor="let car of cars | filterpipe:filterText">
+			<tr>
+				<td>{{car.carName}}</td>
+				<td>{{car.brandName}}</td>
+				<td>{{car.colorName}}</td>
+				<td>{{car.modelYear}}</td>
+				<td>{{car.dailyPrice | currency}}</td>
+				<td style="text-align: center;">{{car.minFindeksPoint}}</td>
+				<td class="mid">
+					<span>
+						<button data-bs-toggle="modal" data-bs-target="#addPhoto" class="btn
+							btn-info ml-5" (click)="targetThisCar(car)"><fa-icon
+								[icon]="faCamera"></fa-icon></button>
+					</span>
+
+					<span routerLink="/admin/cars/{{car.carId}}">
+						<button data-bs-toggle="modal"
+							data-bs-target="#update" (click)="targetThisCar(car)" class="btn
+							btn-success"><fa-icon
+								[icon]="faWrench"></fa-icon></button>
+					</span>
+
+					<span>
+						<button data-bs-toggle="modal" data-bs-target="#delete" class="btn
+							btn-danger ml-5" (click)="targetThisCar(car)"><fa-icon
+								[icon]="faTrashAlt"></fa-icon></button>
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<table class="container mt-2 mb-5" *ngIf="dataLoaded">
-	<thead>
-		<tr>
-			<th scope="col"><h1>Car</h1></th>
-			<th scope="col"><h1>Brand</h1></th>
-			<th scope="col"><h1>Color</h1></th>
-			<th scope="col"><h1>ModelYear</h1></th>
-            <th scope="col"><h1>DailyPrice</h1></th>
-			<th scope="col"><h1>Edit / Delete</h1></th>
-		</tr>
-	</thead>
-	<tbody *ngFor="let car of cars">
-		<tr>
-			<td>{{car.carName}}</td>
-			<td>{{car.brandName}}</td>
-			<td>{{car.colorName}}</td>
-			<td>{{car.modelYear}}</td>
-            <td>{{car.dailyPrice}}</td>
-			<td class="mid">
-				<button class="btn btn-success"><fa-icon [icon]="faWrench"></fa-icon></button>
-				<button class="btn btn-danger ml-5"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
-			</td>
-		</tr>
-	</tbody>
-</table>
+
+
+
+<!-- Car Add Form -->
+<div class="modal fade" id="car" tabindex="-1"
+	aria-labelledby="car" aria-hidden="true">
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Add Car</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+
+				<form [formGroup]="carAddForm">
+
+					<div class="mb-3">
+						<label for="message-text" class="col-form-label">Description:</label>
+						<input type="text" formControlName="description" class="form-control"
+							autocomplete="off"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="cars">Brand:</label>
+						<select class="form-select" formControlName="brandId" id="brandId">
+							<option *ngFor="let brand of brands"
+								[ngValue]=brand.brandId>{{brand.brandName}}</option>
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label for="cars">Color:</label>
+						<select class="form-select" formControlName="colorId" id="colorId">
+							<option *ngFor="let color of colors" [ngValue]="color.colorId">{{color.colorName}}</option>
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Model Year:</label>
+						<input type="number" formControlName="modelYear" class="form-control"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Daily Price:</label>
+						<input type="number" formControlName="dailyPrice" class="form-control"
+							autocomplete="off"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Min Findeks Point:</label>
+						<input type="number" min="0" max="1900" formControlName="minFindeksPoint"
+							autocomplete="off"
+							class="form-control"
+							id="recipient-name">
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" (click)="addcar()" class="btn btn-primary">Add Car</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Update Car -->
+
+<div *ngIf="modal" class="modal fade" id="update" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Update Car</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form [formGroup]="carUpdateForm">
+
+					<div class="mb-3">
+						<label for="message-text" class="col-form-label">Description:</label>
+						<input type="text"
+							formControlName="description"
+							class="form-control"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="cars">Brand:</label>
+						<select class="form-select" formControlName="brandId" id="brandId">
+							<option *ngFor="let brand of brands" [ngValue]="brand.brandId">{{brand.brandName}}</option>
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label for="cars">Color:</label>
+						<select class="form-select" formControlName="colorId" id="colorId">
+							<option *ngFor="let color of colors" [ngValue]="color.colorId">{{color.colorName}}</option>
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Model Year:</label>
+						<input type="number" formControlName="modelYear"
+
+							class="form-control"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Daily Price:</label>
+						<input type="number" formControlName="dailyPrice" class="form-control"
+							id="recipient-name">
+					</div>
+
+					<div class="mb-3">
+						<label for="recipient-name" class="col-form-label">Min Findeks Point:</label>
+						<input type="number" min="0" max="1900" formControlName="minFindeksPoint"
+							class="form-control"
+							id="recipient-name">
+					</div>
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" (click)="updateCar()">Save
+					changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Delete Car -->
+<div class="modal fade" id="delete" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Delete Car</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Are you sure want to delete this car
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Close</button>
+				<button type="button" (click)="deleteCar()" data-bs-dismiss="modal"
+					class="btn btn-danger">Remove
+					Car</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Update CarImage -->
+<div class="modal fade" id="addPhoto" tabindex="-1"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Add Photo</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+
+			<div class="modal-body">
+				<form [formGroup]="imageAddForm">
+					<input class="form-control mb-3" id="formFileLg"
+						type="file" formControlName="Image" (change)="selectFiles($event)">
+				</form>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">Close</button>
+				<button type="button" (click)="uploadFiles()" data-bs-dismiss="modal"
+					class="btn btn-success">Add Photo</button>
+			</div>
+		</div>
+	</div>
+</div>
