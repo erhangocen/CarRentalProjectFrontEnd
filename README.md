@@ -18,6 +18,34 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 **Click It ↑↑↑**
 
+## Layers
+#### Components, Services, Models, Guards, Pipes
+
+<details>
+  <summary>Details</summary>
+
+### Components
+
+Includes HTML,Typesript and CSS files. The Typescript files generally use related component service.
+
+### Services
+
+It is the part the connection with the API is provided.Confusion is avoided by implementation service in Component after write the necessary method.
+
+### Models
+
+Data from the API is kept as a property from an interface on the Front-End and displayed to user in Component
+
+### Guards
+
+Guards are guard your components.
+
+### Pipes
+
+If we have a data and we want using data differently can use the pipe.(For Example: If we have a price data and want add vat this price, we can use pipe)
+
+</details><p></p>
+
 
 
 #### Contact me: *erhangocenn@gmail.com - https://www.linkedin.com/in/erhan-göcen-0854bb206/*
