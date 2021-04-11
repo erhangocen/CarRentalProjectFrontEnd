@@ -38,7 +38,7 @@ Data from the API is kept as a property from an interface on the Front-End and d
 
 ### Guards
 
-Guards are guard your components.
+Guards are guard our components.
 
 ### Pipes
 
