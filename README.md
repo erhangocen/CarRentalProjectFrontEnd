@@ -48,6 +48,6 @@ If we have a data and we want using data differently can use the pipe.(For Examp
 
 
 
-#### Contact me: *erhangocenn@gmail.com - https://www.linkedin.com/in/erhan-göcen-0854bb206/*
+#### Contact me: *erhangocenn@gmail.com - https://www.linkedin.com/in/erhan-gocen-0854bb206/*
 
 #### Thanks for that <a href="https://github.com/engindemirog"><b>Engin Demiroğ</b></a>
